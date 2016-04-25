@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Projekt_PPJ:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="projekt_ppj-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Projekt_PPJ:war exploded" />
+    </root>
+  </artifact>
+</component>
