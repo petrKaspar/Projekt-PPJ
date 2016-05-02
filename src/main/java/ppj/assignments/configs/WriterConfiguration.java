@@ -13,12 +13,12 @@ import ppj.assignments.writer.Writer;
 @Configuration
 public class WriterConfiguration {
     //podle aktivniho profilu se v mainu vzbere spravnz writer
-    @Profile("prod")
+    //@Profile("prod")
     @Bean
     public Writer defaultWriter(){return new ProdWriter();}
     // je jedno, jak se to jmenuje
 
-    @Profile("devel")
+    //@Profile("devel")
     @Bean
     public Writer debugtWriter(){return new ProdWriter();}
 
