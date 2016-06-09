@@ -1,0 +1,3 @@
+23:36:26.359 [main] INFO  cz.tul.Main - Starting Main on Petr with PID 5104 (C:\Users\Petr\Skola\PPJ\Projekt_PPJ\target\classes started by Petr in C:\Users\Petr\Skola\PPJ\Projekt_PPJ)
+23:36:26.370 [main] INFO  cz.tul.Main - The following profiles are active: mongo
+23:36:48.990 [main] INFO  cz.tul.Main - Started Main in 27.275 seconds (JVM running for 33.491)
