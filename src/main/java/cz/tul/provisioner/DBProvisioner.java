@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+// provision - ustanovení, poskytování
 @Component
 @Transactional
 public class DBProvisioner implements InitializingBean {
