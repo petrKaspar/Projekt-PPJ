@@ -2,18 +2,21 @@ package cz.tul.data;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Petr on 10.06.2016.
  */
-@Entity
+@Entity     // tato anotace naznačuje, že se jedná o JPA entitu.
 @Table(name = "komentar")
 @Document(collection = "komentar")
 public class Komentar {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
+    //lze take relace M:N - @ManyToMany    @JoinTable(...
     private int autor;  // id autora
     private String text;    //	Text komentáře
     private String vytvoreni;  // Datum vytvoreni
@@ -21,12 +24,18 @@ public class Komentar {
     private int nlike;  // Počet like
     private int ndislake;    // Počet dislike
 
-    public Komentar(int id, int autor, String text, String vytvoreni) {
-        this.id = id;
+    protected Komentar() {}
+
+    public Komentar(int autor, String text, String vytvoreni) {
         this.autor = autor;
         this.text = text;
         this.vytvoreni = vytvoreni;
     }
+
+    /*
+    Výchozí konstruktor existuje pouze kvůli JPA. Nebude použít přímo, takže je označen jako chráněný.
+    Druhý konstruktor je ten, který se bude používat k vytvoření instance Komentar
+     */
 
     public int getId() {
         return id;

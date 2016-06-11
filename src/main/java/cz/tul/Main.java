@@ -2,8 +2,10 @@ package cz.tul;
 
 import cz.tul.configuration.JpaConfiguration;
 import cz.tul.configuration.MongoConfiguration;
+import cz.tul.data.Autor;
 import cz.tul.data.Bill;
 import cz.tul.data.User;
+import cz.tul.repositories.BaseAutorRepository;
 import cz.tul.repositories.BaseBillRepository;
 import cz.tul.repositories.BaseUserRepository;
 import cz.tul.services.BillService;
@@ -35,10 +37,17 @@ public class Main {
         ConfigurableApplicationContext context = application.run(args);
         BaseBillRepository billRepository = context.getBean(BaseBillRepository.class);
         BaseUserRepository userRepository = context.getBean(BaseUserRepository.class);
+        BaseAutorRepository autorRepository = context.getBean(BaseAutorRepository.class);
 
         User u = userRepository.save(new User(UUID.randomUUID(), "jarda", 28));
         Bill b = billRepository.save(new Bill(UUID.randomUUID(), 250, u));
 
+        for (Autor customer : autorRepository.findAll()) {
+            System.out.println(customer.toString());
+        }
+
+        System.out.println(autorRepository.findAll());
+        //context.getBean(BillService.class).listBills().forEach(System.out::println);
 
         System.out.println(billRepository.findOne(b.getId()));
         context.getBean(BillService.class).listBills().forEach(System.out::println);

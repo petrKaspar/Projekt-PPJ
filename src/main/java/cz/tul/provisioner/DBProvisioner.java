@@ -1,7 +1,9 @@
 package cz.tul.provisioner;
 
+import cz.tul.data.Autor;
 import cz.tul.data.Bill;
 import cz.tul.data.User;
+import cz.tul.repositories.BaseAutorRepository;
 import cz.tul.repositories.BaseBillRepository;
 import cz.tul.repositories.BaseUserRepository;
 import org.springframework.beans.factory.InitializingBean;
@@ -26,11 +28,40 @@ public class DBProvisioner implements InitializingBean {
     @Autowired
     private BaseUserRepository userRepository;
 
+    @Autowired
+    private BaseAutorRepository autorRepository;
+
     @Override
     public void afterPropertiesSet() throws Exception {
+        //afterPropertiesSet() je call-back metoda z InitializingBean interface
+
         provisionUsersCollectionIfEmpty();
         provisionBillsCollectionIfEmpty();
+
+        provisionAutorCollectionIfEmpty();
+       // provisionKomentarCollectionIfEmpty();
+       // provisionObrazekCollectionIfEmpty();
     }
+    private boolean provisionAutorCollectionIfEmpty() throws IOException {
+        boolean isEmpty = autorRepository.count() == 0;
+        if (isEmpty) {
+
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/autori.txt")))) {
+                List<Autor> els = read.lines().map(s -> s.split("\\s"))
+                        .map(a -> new Autor(a[0], a[1])).collect(Collectors.toList());
+                //.map(a -> new Autor(Long.valueOf(a[0]).longValue() , a[1], a[2])).collect(Collectors.toList());
+                System.out.println(els.size()+" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                for (Autor a:els) {
+                    System.out.println(a.toString());
+
+                }
+                autorRepository.save(els);
+            }
+        }
+        return isEmpty;
+    }
+
+
 
     private boolean provisionUsersCollectionIfEmpty() throws IOException {
         boolean isEmpty = userRepository.count() == 0;
