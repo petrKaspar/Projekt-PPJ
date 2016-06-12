@@ -14,10 +14,13 @@ public class Komentar {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
 
     //lze take relace M:N - @ManyToMany    @JoinTable(...
+    @Column(name = "autor")
     private int autor;  // id autora
+    @Column(name = "text")
     private String text;    //	Text komentáře
     private String vytvoreni;  // Datum vytvoreni
     private String aktualizace;  // Datum posledni aktualizace

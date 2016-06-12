@@ -21,7 +21,7 @@ public class User {
 
     @TextIndexed
     private String name;
-
+    @Column(name = "age")
     private int age;
 
     public User(UUID id) {

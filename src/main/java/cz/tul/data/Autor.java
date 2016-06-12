@@ -18,13 +18,16 @@ public class Autor {
    /* @Id
     @GeneratedValue(strategy=GenerationType.AUTO)   // samozřejmě autoinkrementace (v konstruktoru id již pak nemusí být)
     private int  id;*/
+/*@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name="id", nullable=false, unique=true)*/
 @Id
-@GeneratedValue(strategy = GenerationType.TABLE)
-private Long id;
-
-    @Column
+@GeneratedValue(strategy= GenerationType.AUTO)
+private long id;
+//@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "jmeno")
     private String jmeno;
-    @Column
+    @Column(name = "registrace")
     private String registrace;  // Datum registrace
 
     protected Autor() {}

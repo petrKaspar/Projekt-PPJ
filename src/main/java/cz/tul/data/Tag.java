@@ -15,9 +15,12 @@ import static javax.swing.text.StyleConstants.Size;
 public class Tag {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
    // @Size(max = 16)
+   @Column(name = "tag")
     private String tag;
 
+    protected Tag() { }
 }

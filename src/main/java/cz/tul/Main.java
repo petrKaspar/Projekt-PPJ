@@ -46,7 +46,7 @@ public class Main {
             System.out.println(customer.toString());
         }
 
-        System.out.println(autorRepository.findAll());
+       // System.out.println(autorRepository.findAll());
         //context.getBean(BillService.class).listBills().forEach(System.out::println);
 
         System.out.println(billRepository.findOne(b.getId()));

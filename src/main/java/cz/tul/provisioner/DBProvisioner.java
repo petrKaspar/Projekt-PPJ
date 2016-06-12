@@ -19,7 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 // provision - ustanovení, poskytování
 @Component
-@Transactional
+@Transactional//(noRollbackFor=Exception.class)
 public class DBProvisioner implements InitializingBean {
 
     @Autowired
@@ -45,11 +45,17 @@ public class DBProvisioner implements InitializingBean {
     private boolean provisionAutorCollectionIfEmpty() throws IOException {
         boolean isEmpty = autorRepository.count() == 0;
         if (isEmpty) {
+            /*autorRepository.save(new Autor("Jack", "Bauer"));
+            autorRepository.save(new Autor("Chloe", "O'Brian"));
+            autorRepository.save(new Autor("Kim", "Bauer"));
+            for (Autor a:autorRepository.findAll()) {
+                System.out.println(a.toString());
 
+            }*/
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/autori.txt")))) {
                 List<Autor> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Autor(a[0], a[1])).collect(Collectors.toList());
-                //.map(a -> new Autor(Long.valueOf(a[0]).longValue() , a[1], a[2])).collect(Collectors.toList());
+                        //.map(a -> new Autor(a[0], a[1])).collect(Collectors.toList());
+                .map(a -> new Autor(Long.valueOf(a[0]).longValue() , a[1], a[2])).collect(Collectors.toList());
                 System.out.println(els.size()+" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 for (Autor a:els) {
                     System.out.println(a.toString());
